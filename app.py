@@ -1,8 +1,11 @@
 import streamlit as st
 import pickle
+import os
 
-model = pickle.load(open("spam_model.pkl", "rb"))
-vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = pickle.load(open(os.path.join(BASE_DIR, "spam_model.pkl"), "rb"))
+vectorizer = pickle.load(open(os.path.join(BASE_DIR, "vectorizer.pkl"), "rb"))
 
 st.set_page_config(page_title="Email Spam Detector")
 
@@ -23,3 +26,4 @@ if st.button("Check Email"):
             st.error("🚫 This email is SPAM")
         else:
             st.success("✅ This email is NOT SPAM")
+
